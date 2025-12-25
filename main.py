@@ -35,15 +35,7 @@ with st.sidebar:
         "This app predicts stock prices using Facebook Prophet and displays technical indicators."
     )
     stocks = get_sp500_tickers()
-    # If fetching the S&P 500 tickers failed, provide a manual ticker input so
-    # the app doesn't pass None into yfinance (which causes the replace error).
-    if stocks:
-        selected_stock = st.selectbox("Select stock for prediction", stocks)
-    else:
-        st.error(
-            "Could not fetch the S&P 500 list. Please enter a ticker symbol manually."
-        )
-        selected_stock = st.text_input("Enter ticker symbol (e.g. AAPL)", value="AAPL")
+    selected_stock = st.selectbox("Select stock for prediction", stocks)
     n_years = st.slider("Years of prediction:", 1, 4)
     target = st.selectbox("Forecast target", ["Close", "Open", "Volume"])
 
@@ -69,7 +61,7 @@ def load_data(ticker):
 
 data = load_data(selected_stock)
 
-
+# Show company info
 try:
     info = yf.Ticker(selected_stock).info
     st.sidebar.markdown(f"**Company:** {info.get('longName', 'N/A')}")
