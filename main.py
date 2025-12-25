@@ -92,7 +92,7 @@ def plot_raw_data():
         yaxis_title="Price",
         height=350  # Reduce the plot height here
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 plot_raw_data()
 
@@ -122,7 +122,7 @@ if 'Date' in data.columns and target in data.columns:
 
     st.subheader("Forecast Plot")
     fig1 = plot_plotly(model, forecast)
-    st.plotly_chart(fig1, use_container_width=True)  # Forecast plot stays full width
+    st.plotly_chart(fig1, width='stretch')  # Forecast plot stays full width
 
     st.subheader("Forecast Components")
     fig2 = model.plot_components(forecast)
